@@ -18,7 +18,7 @@ export default {
   output: {
     // path: path.resolve(__dirname, 'dist'),
     path: path.resolve(__dirname, ''),
-    publicPath: '/',
+    publicPath: '/md-dytable/',
     filename: '[name].js'
   },
   plugins: [
