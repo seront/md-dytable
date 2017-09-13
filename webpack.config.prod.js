@@ -16,14 +16,14 @@ export default {
   },
   target: 'web',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    // path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, ''),
     publicPath: '/',
-    filename: '[name].[chunkhash].js'
+    filename: '[name].js'
   },
   plugins: [
     //Para manejar el css
-    // new ExtractTextPlugin('style.css'),
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin('style.css'),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),
@@ -33,10 +33,11 @@ export default {
     //Divide el build en chunks
     new webpack.optimize.CommonsChunkPlugin({
       names : ['main','vendor']
+      // names : ['main']
     }),
     // Create HTML file that includes reference to bundled JS.
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'demo/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,

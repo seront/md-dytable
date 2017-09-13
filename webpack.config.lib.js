@@ -14,7 +14,6 @@ export default {
   //que no se incluyen en el
   externals: {
     "angular": "angular",
-    "angular-ui-router": "angular-ui-router",
     "angular-translate": "angular-translate",
     "angular-material": "angular-material",
     "angular-sanitize": "angular-sanitize",
@@ -25,9 +24,9 @@ export default {
   output: {
     path: path.resolve(__dirname, 'lib'),
     // nombre de la libreria
-    filename: 'medipass-base.js',
+    filename: 'md-dytable.js',
     // para que webpack exporte el
-    library: 'medipass-base',
+    library: 'md-dytable',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
