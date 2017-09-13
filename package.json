@@ -1,11 +1,11 @@
 {
-  "name": "medipass-base",
+  "name": "md-dytable",
   "version": "1.0.0",
   "description": "Componentes minimos para comenzar con una aplicacion AngularJS con angular material",
   "main": "lib/medipass-base.js",
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
-    "start": "npm-run-all --parallel security-check open:src lint:watch start-mockapi",
+    "start": "npm-run-all --parallel security-check open:src lint:watch",
     "open:src": "babel-node buildScripts/srcServer.js",
     "open:src:nodemon": "nodemon buildScripts/srcServer.js --exec babel-node",
     "security-check": "nsp check",

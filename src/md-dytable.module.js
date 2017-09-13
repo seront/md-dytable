@@ -12,9 +12,5 @@ export default angular.module('md-dytable', [
   ngMaterial,
   ngSanitize,
   translate,
-  ComponentsModule,
-  CustomTableModule,
-  CommonsModule])
-  .config(translateConfig)
-  .config(themeConfig)
+  CustomTableModule])
   .name;

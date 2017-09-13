@@ -85,7 +85,7 @@ class mainController{
 
 export const Main = {
   template: require('./main.html'),
-  controller: mainController,
+  controller: ["$log", mainController],
   bindings: {
   }
 };

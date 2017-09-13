@@ -20,9 +20,10 @@ class UserAdminController {
     };
 
     this.objectConfig = {
-      key1: { type: "text-filter", filter: 'capitalize', option: true },
+      // key1: { type: "text-filter", filter: 'capitalize', option: true },
+      key1: { type: "text", filter: 'capitalize', option: true },
       key2: {
-        type: "number", filter: 'miles'
+        type: "number", filter: 'currency', option: "# "
       },
       key3: { type: "switch" },
       key4: { type: "switch", trueValue: 1, falseValue: 0 },
@@ -189,7 +190,7 @@ class UserAdminController {
 
 export const UserAdmin = {
   template: require('./user-admin.html'),
-  controller: UserAdminController,
+  controller: ["$log", UserAdminController],
   bindings: {
 
   }

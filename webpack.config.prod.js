@@ -5,13 +5,13 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import OptimizeCssAssetsPlugin  from 'optimize-css-assets-webpack-plugin';
 
 const VENDOR_LIBS = [
-  "angular","angular-ui-router"
+  "angular","@uirouter/angularjs"
 ];
 
 export default {
   devtool: 'source-map',
   entry: {
-    main : path.resolve(__dirname, 'src/index'),
+    main : path.resolve(__dirname, 'demo/index'),
     vendor : VENDOR_LIBS
   },
   target: 'web',
@@ -19,10 +19,6 @@ export default {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].[chunkhash].js'
-    // library: libraryName,
-    // libraryTarget: 'umd',
-    // umdNamedDefine: true,
-    // filename: 'medipass-semilla.js'
   },
   plugins: [
     //Para manejar el css
@@ -40,7 +36,7 @@ export default {
     }),
     // Create HTML file that includes reference to bundled JS.
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -50,7 +46,7 @@ export default {
         removeStyleLinkTypeAttributes: true,
         keepClosingSlash: true,
         minifyJS: true,
-        // minifyCSS: true,
+        minifyCSS: true,
         minifyURLs: true
       },
       inject: true,
@@ -59,12 +55,6 @@ export default {
       // Ejemplo:
       // trackJSToken: 'INSERT YOUR TOKEN HERE'
     }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    }),
-    // Eliminate duplicate packages when generating bundle
-    new webpack.optimize.DedupePlugin(),
     // Minify JS
     new webpack.optimize.UglifyJsPlugin()
   ],
