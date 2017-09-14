@@ -99,7 +99,7 @@ class TableController {
   }
 
   onSelect(object){
-    console.log("table component row selected");
+    // console.log("table component row selected");
     this.onSelection({object:object});
   }
 

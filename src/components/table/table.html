@@ -20,13 +20,10 @@
           <!-- {{conf[0]}} -->
 
           <md-checkbox ng-if="(conf[1].type === 'checkbox'&&conf[1].ic !== 'checkbox')" ng-model="object[conf[0]]" aria-label="{{conf[0]}}"
-            ng-change="$ctrl.change(object)" ng-class="conf[1].style" ng-disabled="conf[1].disabled" class="md-primary">
+            ng-change="$ctrl.onAction({name: conf[1].action, object: object})" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
           </md-checkbox>
 
-          <md-icon ng-if="(conf[1].type === 'checkbox'&&conf[1].ic !== undefined && object[conf[0]] === true)" style="color: #5A97D5">check</md-icon>
-          <md-icon ng-if="(conf[1].type === 'checkbox'&&conf[1].ic !== undefined && object[conf[0]] !== true)">cancel</md-icon>
-
-          <md-input-container ng-if="(conf[1].type === 'input')" ng-model="object[conf[0]]" aria-label="{{conf[0]}}" ng-class="conf[1].style">
+          <md-input-container ng-if="(conf[1].type === 'input-text')" ng-model="object[conf[0]]" aria-label="{{conf[0]}}" ng-class="conf[1].style">
             <label></label>
             <input ng-model="object[conf[0]]" ng-change="$ctrl.onAction({name: conf[1].action, object: object})" ng-disabled="conf[1].disabled">
           </md-input-container>

@@ -5,7 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import OptimizeCssAssetsPlugin  from 'optimize-css-assets-webpack-plugin';
 
 const VENDOR_LIBS = [
-  "angular","@uirouter/angularjs"
+  "angular"
 ];
 
 export default {

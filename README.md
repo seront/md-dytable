@@ -1,115 +1,77 @@
-# Aviso
-este repositorio es un fork de 
-https://github.com/psotoulloa/js-dev-env
-revise primero antes de comenzar con este repositorio en forma de desarrollo
+# Material Design dinamyc table
+AngularJS component for the creation of tables under Material Design specs from a configuration, useful for large aplications where many tables are needed, if
+you only need one or two tables probably this component is an overkill, in such case it's recommended use de original module of the table
+in https://github.com/daniel-nagy/md-data-table, used by this component.
 
-## Guia de estilo
+Componente AngularJS para la creación de tablas bajo la especificación de Material Design a partir de una configuración, muy util para aplicaciones grandes en las que
+se usen muchas tablas, si solo necesitas una o dos tablas probablemente este componente este sobredimensionado para ti, se recomienda
+usar el modulo original de la tabla en https://github.com/daniel-nagy/md-data-table que es usada por este componente.
 
-Sigamos los parametros sugeridos aqui https://github.com/toddmotto/angularjs-styleguide
+## Getting started - Preparaciones
+### Prerequisites - Prerequisitos
 
-## Instalar como libreria
-Este repositorio contiene una serie de modulos donde se encuentran tanto componentes separados (headers, footers, sidebar) 
-como modulos genericos integrados como el "Access", donde se encuentran las vistas integradas de Login, Recuperar contraseña entre otras ya maquetadas.
-Para instalar ejecute
+NPM
 
-npm -i https://github.com/seront/medipass-base.git --save
+```angular-material```
 
-luego importe las dependencias en el archivo principal de la aplicación
+AngularJS version >= 1.5.0
 
-```javascript
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/medipass-base/lib/medipass-base.css';
+### Installing - Instalación
 
-import {AccessModule} from 'medipass-base'; //Veáse lista de modulos al final de esta documentación
 ```
-y en el modulo principal de la aplicación
-```javascript
-let app = angular.module('app', [AccessModule])
+npm -i md-dytable --save
 ```
-y ya tenemos todas las vistas que se encuentran en el modulo Access en nuestra aplicación tan solo con ir a /login,
-pues trae las rutas ya configuradas
-## Como crear componentes y modulos base
-proximamente individuos
-
-## Componentes
-### Side menu
-Componente que renderiza un menu lateral para la navegación interna de la aplicación, se utiliza dentro de la aplicacion de la siguiente manera
+ES6
+```javascript
+import {default as MdDyTableModule} from 'md-dytable';
+//Injecting the dependency in the root module - Inyectando la dependencia en el modulo raíz de la aplicación
+angular.module('app', [MdDyTableModule])
+```
+Optionally - Opcionalmente
+```javascript
+import './project-root/node_modules/md-dytable/dist/md-dytable.js';
+//Injection - Inyeccion 
+angular.module('app', ['md-dytable'])
+```
+## Usage - Uso
+In order to use this component you must place an html snippet like the next in your code - Para usar este componente se debe usar un codigo parecido a este
 ```html
-<sidemenu menu="$ctrl.menu" config="$ctrl.configMenu"></sidemenu>
-```
-Estructura de los bindings
-```javascript
-$ctrl.menu = [
-       {items: [ // estos son sub items que puede tener el menu
-            {
-                state: "app.main.financiador", icon: "location_on", name: "Financiar algo"
-            }
-       ],
-       expanded: false, //Si muestra los sub items o no
-       icon: "user", // material design icon name
-       name: "FINANCIADOR"}, // valor pasado a la directiva "translate" para mostrar
-       {state: "app.dashboard.usuarios", // ui-router state 
-       expanded: false,
-       icon: "people",
-       name: "USUARIOS"}
-     ];
-$ctrl.configMenu = {
-       class: ["md-sidenav-left", "md-whiteframe-4dp"], // ng-class  general
-       //https://material.angularjs.org/latest/api/directive/mdSidenav
-       disableScrollTarget: "body", 
-       isOpen: true,
-       isLockedOpen: "$mdMedia('gt-md')", //usando el servicio de mediaquery de angular material
-       componentId: 'right',
-       toolbar: { // barra superior en el menu, opcional
-         class: ["md-theme-light", "md-hue-1"],
-          text: "Financiador"
-       }
-     };
-```
-### Custom Table
-Componente de tabla personalizable basada en este proyecto https://github.com/daniel-nagy/md-data-table.
-Para ser usada por otro componente se usa de la siguiente manera.
-```html
-<custom-table
-    config="$ctrl.config"
+<md-dytable config="$ctrl.config"
     pagination="$ctrl.pagination"
-    object-config="$ctrl.objectConfig"
+    object-config="$ctrl.objectConfig" 
     headers="$ctrl.headers"
-    objects="$ctrl.objects"
-     actions="$ctrl.actions"
-     on-paginate="$ctrl.onPaginate(page, limit, total)"
-     on-action="$ctrl.accionTabla(name, object)"
-     on-selection="$ctrl.onSelect"
-     on-deselection="$ctrl.onDeselect"></custom-table>
- ```
- ### Bindings
- config: basado en https://github.com/daniel-nagy/md-data-table#row-selection
+    objects="$ctrl.objects" 
+    actions="$ctrl.actions"
+    on-paginate="$ctrl.onPaginate(page, limit)" 
+    on-action="$ctrl.accionTabla(name, object)"
+    on-selection="$ctrl.onSelect" 
+    on-deselection="$ctrl.onDeselect">
+    </md-dytable>
+```
+
+## Options
+### Config
+
+Based on https://github.com/daniel-nagy/md-data-table#row-selection
  
  ```javascript
  this.config = {
-      rowSelect: true, // seleccionar filas?
-      multiple: true, // seleccionar mas de una fila a la vez?
-      progress: "", //promesa para mostrar barra de carga o cambio en
-      autoSelect: true, //true
       rowSelect: true,
-      selectId: "", // propiedad del objeto que lo identifica como unico
-      rowSelectDisable: "" //propiedad del objeto en la fila que dice si la fila se puede seleccionar o no
+      multiple: true,
+      autoSelect: true,
+      rowSelect: true,
+      selectId: "",
+      rowSelectDisable: ""
     };
 ```
-pagination: basado en https://github.com/daniel-nagy/md-data-table#pagination
- ```javascript
- this.pagination = {
-      style: ["pagination-label"], //array de strings, nombres de clases a aplicar, opcional
-      limit: 2,
-      page: 1,
-      total: 5,
-      pageSelect: 1,
-      boundaryLinks: true, //boolean, default: false
-      label: "{of: 'DE', page: 'PAGINA', rowsPerPage: 'FILAS_PAGINAS'}", //formato del string q se le pasa a la tabla
-      limitOptions: [5, 10, 15]
-    };
-```
-object-config: configuracion de los datos de cada fila (hasta ahora solo acepta datos tipo texto)
+
+### Object config
+
+The main reason for creating this component, this object allow you to display the data of your objects in every way soported, adding more as are needed,
+contact me if you need a better way of the current implementations or have sugestions on what data types add.
+
+The keys in the object config must match the key of the data in the object that you wish to display, the ```order``` attribute is used to establish the displaying order of the attibutes of the object in the table row
+
  ```javascript
 this.objectConfig = {
       key1: { type: "text", order: 0 },
@@ -125,8 +87,30 @@ this.objectConfig = {
       options:{depends: "key4", min: 0, max: 10} }//depende del valor que tenga el key4 del objeto el la fila
     };
 ```
-headers: array de encabezados de la tabla, si es numerico se establece como true, esto pasa por $translate
+
+#### Supported types
+
+#### checkbox
+### Pagination
+
+Based on https://github.com/daniel-nagy/md-data-table#pagination
  ```javascript
+ this.pagination = {
+      style: ["pagination-label"], //optional, string array 
+      limit: 2, //required
+      page: 1, //required, must default to 1
+      total: 5, //required
+      pageSelect: 1, //optional
+      boundaryLinks: true, //boolean, default: false
+      label: "{of: 'De', page: 'Página', rowsPerPage: 'Filas por paginas'}", //labels of the pagination
+      limitOptions: [5, 10, 15] // Limit options
+    };
+```
+ ### Headers
+
+ The table headers, the name is displayed using ```$translate```
+
+  ```javascript
 this.headers = [
       { name: "header1", numeric: false },
       { name: "header2", numeric: false },
@@ -134,7 +118,10 @@ this.headers = [
       { name: "header4", numeric: false }
     ];
 ```
- objects: array de objetos a mostrar, cada objeto simboliza una fila del la tabla
+ ### Objects
+
+ Array of objects to display
+
 ```javascript
 var object1 = {
       key1: "value1",
@@ -193,7 +180,6 @@ actions: array de configuración de los botones que se agregan al final de la ta
 on-paginate: ejecutará una funcion del controlador cada vez que se presione uno de los botones de la paginacion de la tabla, esa funcion debe esperar recibir 3 valores
     -page = pagina despues del cambio
     -limit = limite de elementos
-    -total = total de elementos
 ```javascript
 //recomendacion de como usar el binding "onAction"
 onPaginate(page, limit, total){

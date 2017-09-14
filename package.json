@@ -34,7 +34,7 @@
     "angular-animate": "^1.6.5",
     "angular-aria": "^1.6.5",
     "angular-material": "^1.1.4",
-    "angular-material-data-table": "git+https://github.com/seront/md-data-table.git",
+    "angular-material-data-table": "^0.10.10",
     "angular-sanitize": "^1.6.6",
     "angular-translate": "^2.15.2"
   },
