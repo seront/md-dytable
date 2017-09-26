@@ -19,7 +19,7 @@
         <td md-cell ng-repeat="conf in $ctrl.newConfig" ng-class="conf[1].cellStyle">
           <!-- {{conf[0]}} -->
 
-          <md-checkbox ng-if="(conf[1].type === 'checkbox'&&conf[1].ic !== 'checkbox')" ng-model="object[conf[0]]" aria-label="{{conf[0]}}"
+          <md-checkbox ng-if="(conf[1].type === 'checkbox)" ng-model="object[conf[0]]" aria-label="{{conf[0]}}"
             ng-change="$ctrl.onAction({name: conf[1].action, object: object})" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
           </md-checkbox>
 
@@ -28,7 +28,7 @@
             <input ng-model="object[conf[0]]" ng-change="$ctrl.onAction({name: conf[1].action, object: object})" ng-disabled="conf[1].disabled">
           </md-input-container>
 
-          <md-input-container ng-if="(conf[1].type === 'inputNumber')" ng-model="object[conf[0]]" aria-label="{{conf[0]}}" ng-class="conf[1].style">
+          <md-input-container ng-if="(conf[1].type === 'input-number')" ng-model="object[conf[0]]" aria-label="{{conf[0]}}" ng-class="conf[1].style">
             <label translate="{{conf[1].text}}"></label>
             <input ng-model="object[conf[0]]"
             ng-change="$ctrl.onAction({name: conf[1].action, object: object})"
@@ -38,7 +38,7 @@
              max="{{conf[1].options.max}}">
           </md-input-container>
 
-          <span ng-if="(conf[1].type === 'text')" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled" translate="{{object[conf[0]]}}">
+          <span ng-if="(conf[1].type === 'text')" ng-class="conf[1].style" ng-disabled="conf[1].disabled" translate="{{object[conf[0]]}}">
           </span>
 
           <md-icon ng-if="(conf[1].type === 'icon')" ng-class="conf[1].style">
@@ -52,7 +52,8 @@
             </md-icon>
             </div>
           </div>
-          <div ng-if="(conf[1].type === 'array-text')">
+
+          <div ng-if="(conf[1].type === 'array-text')" ng-class="conf[1].style">
               <span ng-repeat="value in object[conf[0]]">
                 <span>
                   {{value|translate}}
@@ -68,51 +69,37 @@
           </div>
 
 
-          <span ng-if="(conf[1].type === 'text-filter')" flex="{{conf[1].flex}}" ng-class="conf[1].style">
+          <span ng-if="(conf[1].type === 'filter')" ng-class="conf[1].style">
               {{$ctrl.applyFilter(object[conf[0]], conf[1].filter, conf[1].option)}}
           </span>
 
-          <span ng-if="conf[1].type === 'phone'" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
-          {{object[conf[0]]}}
-          </span>
+          <span ng-if="(conf[1].type === 'child')" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
+         {{object[conf[0]][conf[1].child]}}
+      </span>
 
+          <span ng-if="(conf[1].type === 'copy')" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
+         {{object[conf[1].copy]}}
+      </span>
 
-          <span ng-if="conf[1].type === 'number'" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
-            {{$ctrl.applyFilter(object[conf[0]], conf[1].filter, conf[1].simbol)}}
-          </span>
-          <span ng-if="conf[1].type === 'text-format'" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
-            {{$ctrl.applyFilter(object[conf[0]], conf[1].filter, conf[1].simbol)}}
-          </span>
-          <span ng-if="conf[1].type === 'currency'">
-          {{$ctrl.applyFilterCurrency(object[conf[0]], conf[1].symbol, conf[1].fractionSize)}}
-          </span>
-          <span ng-if="(conf[1].type === 'child')" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
-         {{object[conf[0]][conf[1].options.child]}}
+          <span ng-if="(conf[1].type === 'filter-copy')" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
+              {{$ctrl.applyFilter(object[conf[1].child], conf[1].filter, conf[1].option)}}
       </span>
-          <span ng-if="(conf[1].type === 'copy')" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
-         {{object[conf[1].options.child]}}
-      </span>
-          <span ng-if="(conf[1].type === 'copy-filter')" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
-              {{$ctrl.applyFilter(object[conf[1].options.child], conf[1].filter, conf[1].simbol)}}
-      </span>
-          <img ng-if="(conf[1].type === 'image')" ng-src="{{object[conf[0]]}}" ng-class="conf[1].style" alt="{{conf[1].alt}}" ng-click="conf[1].action(object)"
-          />
-          <span ng-if="(conf[1].type === 'date')" flex="{{conf[1].flex}}" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
+
+          <img ng-if="(conf[1].type === 'image')" ng-src="{{object[conf[0]]}}" ng-class="conf[1].style" alt="{{conf[1].alt}}"/>
+
+          <span ng-if="(conf[1].type === 'date')" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
          {{object[conf[0]]|date: conf[1].format}}
       </span>
+
         <div ng-if="conf[1].type === 'switch'" layout="row">
         <span  flex></span>
-          <md-switch ng-if="conf[1].type === 'switch' && typeof(conf[1].trueValue) == 'undefined' && typeof(conf[1].falseValue) == 'undefined'"
-            ng-model="object[conf[0]]" ng-change="$ctrl.onAction({name: conf[1].action, object: object})" aria-label="Switch 1"
-            ng-disabled="conf[1].disabled">
-
-          </md-switch>
-          <md-switch ng-if="conf[1].type === 'switch' && typeof(conf[1].trueValue) != 'undefined' && typeof(conf[1].falseValue) != 'undefined'"
-            ng-model="object[conf[0]]" ng-true-value="{{conf[1].trueValue}}" ng-false-value="{{conf[1].falseValue}}" ng-change="$ctrl.onAction({name: conf[1].action, object: object})"
-            aria-label="Switch 1" ng-disabled="conf[1].disabled">
+          <md-switch ng-if="conf[1].type === 'switch'" ng-model="object[conf[0]]"
+          ng-true-value="{{conf[1].trueValue}}" ng-false-value="{{conf[1].falseValue}}"
+          ng-change="$ctrl.onAction({name: conf[1].action, object: object})" aria-label="{{conf[0]}}" ng-disabled="conf[1].disabled">
           </md-switch>
           <span flex></span>
         </div>
+
         </td>
         <td md-cell ng-if="$ctrl.actions && $ctrl.actions.length > 0" ng-repeat="action in $ctrl.actions" ng-class="action.cellStyle">
           <!-- <div ng-if="(action.type === 'switch')" layout="row" ng-hide="object[action.hide.property] === action.hide.value"> -->
