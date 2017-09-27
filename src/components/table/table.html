@@ -10,6 +10,9 @@
               {{header.tooltip.text | translate}}
             </md-tooltip>
         </th>
+        <th md-column ng-repeat="action in $ctrl.actions" flex class="table-header">
+
+        </th>
       </tr>
     </thead>
     <tbody md-body>
@@ -17,9 +20,8 @@
         md-on-deselect="$ctrl.onDeselection(object)" x-md-auto-select="$ctrl.config.autoSelect" ng-disabled="object[$ctrl.config.rowSelectDisable]"
         md-auto-select>
         <td md-cell ng-repeat="conf in $ctrl.newConfig" ng-class="conf[1].cellStyle">
-          <!-- {{conf[0]}} -->
 
-          <md-checkbox ng-if="(conf[1].type === 'checkbox)" ng-model="object[conf[0]]" aria-label="{{conf[0]}}"
+          <md-checkbox ng-if="(conf[1].type === 'checkbox')" ng-model="object[conf[0]]" aria-label="{{conf[0]}}"
             ng-change="$ctrl.onAction({name: conf[1].action, object: object})" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
           </md-checkbox>
 
@@ -82,7 +84,7 @@
       </span>
 
           <span ng-if="(conf[1].type === 'filter-copy')" ng-class="conf[1].style" ng-disabled="conf[1].disabled">
-              {{$ctrl.applyFilter(object[conf[1].child], conf[1].filter, conf[1].option)}}
+              {{$ctrl.applyFilter(object[conf[1].copy], conf[1].filter, conf[1].option)}}
       </span>
 
           <img ng-if="(conf[1].type === 'image')" ng-src="{{object[conf[0]]}}" ng-class="conf[1].style" alt="{{conf[1].alt}}"/>

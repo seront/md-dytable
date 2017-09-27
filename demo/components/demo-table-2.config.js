@@ -1,42 +1,32 @@
 export const tableConfig = {
   headers: [
-    { name: "header1", numeric: false, tooltip:{text: "MENSAJE_TOOLTIP"} },
-    { name: "header2", numeric: false },
-    { name: "header3", numeric: false },
-    { name: "header4", numeric: false },
-    { name: "numero", numeric: true }
+    { name: "Icon", numeric: false, tooltip:{text: "Header tooltip"} },
+    { name: "Text", numeric: false },
+    { name: "Child", numeric: false },
+    { name: "Image", numeric: false },
+    { name: "Date", numeric: true }
   ],
   config: {
     multiple: false, // seleccionar mas de una fila a la vez?
     progress: "", //promesa para mostrar barra de carga o cambio en
-    autoSelect: true, //true
-    rowSelect: true,
+    autoSelect: false, //true
+    rowSelect: false,
     selectId: "", // propiedad del objeto que lo identifica como unico
     rowSelectDisable: "" //propiedad del objeto en la fila que dice si la fila se puede seleccionar o no
   },
   objectConfig: {
-    key1: { type: "text", filter: 'capitalize', option: true },
+    key1: { type: "icon", order: 0 },
     key2: {
-      type: "number", filter: 'currency', option: "# "
+      type: "text", order: 1
     },
-    key3: { type: "switch" },
-    key4: { type: "switch", trueValue: 1, falseValue: 0 },
-    key5: { type: "array-object", value: "correo", limit: 2 },
-    // key6: { type: "text", avoid: '{"@nil":true}'},
-    key6: { type: "copy", options:{child: "key2"}},
-    key7: { type: "icon-set", options: [
-      {value: 1,
-      icon: "person", style: []},
-      {value: 2,
-      icon: "settings"},
-      {value: 3,
-      icon: "dashboard"}
-    ]}
+    key3: { type: "child", child: 'value', order: 3 },
+    key4: { type: "image", order: 4},
+    key5: { type: "date", format: "dd-MM-yyyy"}
   },
   actions:[
     {
       style: ["md-raised", "md-primary", "md-fab"],
-      text: "action1",
+      cellStyle: ["action-cell-style-flat"],
       name: "action1",
       icon: {
         name: "people",
@@ -53,23 +43,41 @@ export const tableConfig = {
       type: "button"
     },
     {
-      style: [],
+      style: ["md-raised", "md-primary"],
+      cellStyle: ["action-cell-style-flat"],
       text: "action2",
       name: "action2",//Nombre dentro del formulario
       model: '', //Nombre de la propiedad del objeto asociada a este switch
       tooltip: {
         style: [],
         zIndex: 0,
-        // visible: true,
-        // delay: 500,
         direction: "top",
-        text: "action switch"
+        text: "action button 2"
       },
-      type: "switch",
-      hide: {
-        property: 'key2',
-        value: 111222333
-      }
+      type: "button"
+    },
+    {
+      style: [],
+      cellStyle: ["action-cell-style-flat"],
+      name: "switch-action",//Nombre dentro del formulario
+      model: '', //Nombre de la propiedad del objeto asociada a este switch
+      tooltip: {
+        style: [],
+        zIndex: 0,
+        direction: "top",
+        text: "Switch action"
+      },
+      type: "switch"
     }
-  ]
+  ],
+  pagination: {
+    style: ["pagination-label"], //array de strings, nombres de clases a aplicar, opcional
+    limit: 2,
+    page: 1,
+    total: 5,
+    pageSelect: 1,
+    boundaryLinks: true, //boolean, default: false
+    label: "{of: 'of', page: 'Page', rowsPerPage: 'Rows per page'}", //formato del string q se le pasa a la tabla
+    limitOptions: [5, 10, 15]
+  }
 };

@@ -7,6 +7,7 @@ import ngMaterial from 'angular-material';
 import {default as mdTable} from '../src/md-dytable.module';
 // import {UserAdmin} from './components/user-admin/user-admin.component';
 import {DemoTable1} from './components/demo-table-1.component';
+import {DemoTable2} from './components/demo-table-2.component';
 
 
 export default angular.module('app', [
@@ -15,4 +16,5 @@ export default angular.module('app', [
   ])
   // .component('userAdmin', UserAdmin)
   .component('demoTable1', DemoTable1)
+  .component('demoTable2', DemoTable2)
 ;

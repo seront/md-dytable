@@ -7,8 +7,7 @@ export default {
   // resolve: { symlinks: false },
   entry: {
     // Ruta del archivo index.js principal del modulo
-    // main: path.resolve(__dirname, 'src/access'),
-    main: path.resolve(__dirname, 'src/medipass.module'),
+    main: path.resolve(__dirname, 'src/md-dytable.module'),
   },
   //bibliotecas externas que requiere este paquete para funcionar pero
   //que no se incluyen en el

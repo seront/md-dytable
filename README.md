@@ -1,13 +1,13 @@
 # Material Design dinamyc table
+
 AngularJS component for the creation of tables under Material Design specs from a configuration, useful for large aplications where many tables are needed, if
 you only need one or two tables probably this component is an overkill, in such case it's recommended use de original module of the table
 in https://github.com/daniel-nagy/md-data-table, used by this component.
 
-Componente AngularJS para la creación de tablas bajo la especificación de Material Design a partir de una configuración, muy util para aplicaciones grandes en las que
-se usen muchas tablas, si solo necesitas una o dos tablas probablemente este componente este sobredimensionado para ti, se recomienda
-usar el modulo original de la tabla en https://github.com/daniel-nagy/md-data-table que es usada por este componente.
+Demo available in https://seront.github.com/md-dytable/
 
 ## Getting started - Preparaciones
+
 ### Prerequisites - Prerequisitos
 
 NPM
@@ -16,26 +16,37 @@ NPM
 
 AngularJS version >= 1.5.0
 
-### Installing - Instalación
+### Installing
+
+```json
+
+npm -i md-dytable --save
 
 ```
-npm -i md-dytable --save
-```
 ES6
+
 ```javascript
+
 import {default as MdDyTableModule} from 'md-dytable';
-//Injecting the dependency in the root module - Inyectando la dependencia en el modulo raíz de la aplicación
+//Injecting the dependency in the root module
 angular.module('app', [MdDyTableModule])
+
 ```
-Optionally - Opcionalmente
+
+Optionally
 ```javascript
+
 import './project-root/node_modules/md-dytable/dist/md-dytable.js';
-//Injection - Inyeccion 
+//Injection
 angular.module('app', ['md-dytable'])
+
 ```
-## Usage - Uso
+
+## Usage
+
 In order to use this component you must place an html snippet like the next in your code - Para usar este componente se debe usar un codigo parecido a este
 ```html
+
 <md-dytable config="$ctrl.config"
     pagination="$ctrl.pagination"
     object-config="$ctrl.objectConfig" 
@@ -47,13 +58,15 @@ In order to use this component you must place an html snippet like the next in y
     on-selection="$ctrl.onSelect" 
     on-deselection="$ctrl.onDeselect">
     </md-dytable>
+
 ```
 
 ## Options
+
 ### Config
 
 Based on https://github.com/daniel-nagy/md-data-table#row-selection
- 
+
  ```javascript
  this.config = {
       rowSelect: true,
@@ -169,7 +182,9 @@ key4: {type: "text", order: 0}
 Renders an md-icon in the table
 
 ```javascript
+
 key4: {type: "icon", order: 0}
+
 ```
 
 ```html
@@ -393,7 +408,7 @@ this.headers = [
 
 ```
 
- ### Objects
+### Objects
 
  Array of objects to display
 

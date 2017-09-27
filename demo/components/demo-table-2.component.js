@@ -1,110 +1,63 @@
 import {tableConfig} from './demo-table-2.config';
 class DemoTable1Controller {
-  // "angular-material-data-table": "git+https://github.com/seront/md-data-table.git",
-  constructor($log) {
+    constructor($log, $mdDialog) {
     this.action1Value = false;
     this.log = $log.log;
+    this.md = $mdDialog;
     this.headers = tableConfig.headers;
     this.config = tableConfig.config;
+    this.pagination = tableConfig.pagination;
+    this.actions = tableConfig.actions;
 
     this.objectConfig = tableConfig.objectConfig;
 
-    // this.objects = [];
     var object1 = {
-      key1: "value1",
-      key2: 111222333,
-      key3: "value3",
-      key4: 1,
-      key7: 1
+      key1: 'dashboard',
+      key2: "Text in object 1",
+      key3: {value: "child value"},
+      key4: "http://lorempixel.com/50/40",
+      key5: new Date()
     };
     var object2 = {
-      key1: "value1 VALUE Value",
-      key2: 111222333,
-      key3: "value3",
-      key5:[{correo: "correo@dominio.com"}, {correo: "correo@dominio.com"}],
-      key4: "0",
-      key7: 2
+      key1: 'people',
+      key2: "Text in object 2",
+      key3: {value: "child value"},
+      key4: "http://lorempixel.com/50/40",
+      key5: new Date()
     };
-    var object3 = {
-      key1: "value1",
-      key2: 111222333444,
-      key3: "value3",
-      key4: "0",
-      key7: 3
-    };
-    this.objects = [object1, object2, object3];
+    this.objects = [object1, object2];
+  }
 
-    // https://github.com/daniel-nagy/md-data-table#pagination
-    this.pagination = {
-      style: ["pagination-label"], //array de strings, nombres de clases a aplicar, opcional
-      limit: 2,
-      page: 1,
-      total: 5,
-      pageSelect: 1,
-      boundaryLinks: true, //boolean, default: false
-      label: "{of: 'DE', page: 'PAGINA', rowsPerPage: 'FILAS_PAGINAS'}", //formato del string q se le pasa a la tabla
-      limitOptions: [5, 10, 15],
-      footLabel: [{title:{text: "Probando:", style: []}, text: {text: "El label", style: []}}]
-    };
+  show(name, object){
+    this.view(name, object);
+    this.md.show(
+      this.md.alert()
+        .parent(angular.element(document.querySelector('main')))
+        .clickOutsideToClose(true)
+        .title('Action: ' + name)
+        .textContent(JSON.stringify(object))
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Roger roger!')
+        // .targetEvent(ev)
+    );
+  }
+
+  view(name, object){
+    this.actionName = name;
+    this.object = object;
   }
 
   accionTabla(name, object) {
-    this.log("accionTabla " + name);
-
-    switch (name) {
-      case 'action1':
-        this.log("accionTabla sw action1");
-        break;
-      case 'action2':
-        this.log("accionTabla sw action2");
-        this.action2(object);
-        break;
-
-      default:
-        this.log(name);
-        this.log(object);
-    }
-  }
-
-  action2(value) {
-    this.log("action2 ");
-    this.log(value);
-  }
-
-  onSelect(object){
-    console.log("onSelect user admin");
-    console.log(object);
-  }
-  onDeselect(object){
-    console.log("onDeselect user admin");
-    console.log(object);
+    // this.show(name, object);
+    this.view(name, object);
   }
 
   $onInit() {
     this.log("user admin componente");
-    // this.action1Value = false;
-
   }
 
   quitarAcciones(){
     this.actions = [];
-  }
-
-  masObjetos(){
-    let ar = this.objects;
-    this.objects = [];
-    var object2 = {
-      key1: "1234567",
-      key2: "value2",
-      key3: true,
-      key4: 1,
-      key5: 5,
-      key6: { "@nil": true}
-    };
-
-    ar.push(object2);
-    console.log(ar);
-    this.objects = ar;
   }
 
   onPaginate(page, limit){
@@ -113,9 +66,9 @@ class DemoTable1Controller {
 
 }
 
-export const DemoTable1 = {
-  template: require('./demo-table-1.html'),
-  controller: ["$log", DemoTable1Controller],
+export const DemoTable2 = {
+  template: require('./demo-table-2.html'),
+  controller: ["$log", "$mdDialog", DemoTable1Controller],
   bindings: {
 
   }
